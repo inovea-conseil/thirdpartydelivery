@@ -110,6 +110,7 @@ class ActionsThirdpartyDelivery
     public function printFieldListTitle($parameters)
     {
         global $conf, $langs;
+        $langs->load('thirdpartydelivery@thirdpartydelivery');
         if ($parameters["currentcontext"] == "supplierorderlist") {
             $this->resprints = getTitleFieldOfList($langs->trans("ThirdpartyDelivery"), $_SERVER["PHP_SELF"], '', $parameters["param"], '', '', $parameters["sortfield"], $parameters["sortorder"], 'right ');
             return $this;
