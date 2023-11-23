@@ -154,6 +154,21 @@ class ActionsThirdpartyDelivery
         return 1;
     }
 
+    public function printFieldListFooter($parameters) {
+        global $conf,$db;
+        if ($parameters["currentcontext"] == "supplierorderlist") {
+            if ( empty( $parameters['arrayfields']['c_ThirdpartyDelivery']) || $parameters['arrayfields']['c_ThirdpartyDelivery']['checked']) {
+                ?>
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $(".liste_total").append("<td></td>");
+                        });
+                    </script>
+                <?php
+            }
+        }
+    }
+
 	/**
 	 * Overloading the doActions function : replacing the parent's function with the one below
 	 *
