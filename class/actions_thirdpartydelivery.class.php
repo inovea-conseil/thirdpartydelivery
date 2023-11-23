@@ -82,15 +82,21 @@ class ActionsThirdpartyDelivery
 		$this->resprints = '';
 		return 0;
 	}
-
     public  function printFieldListWhere($parameters)
     {
         global $conf, $langs;
 
-        if ($parameters["currentcontext"] == "supplierorderlist") {
+        if ($parameters["currentcontext"] == "supplierorderlist" && empty(GETPOST('button_removefilter_x', 'alpha'))) {
             $ThirdpartyDelivery = GETPOST('search_ThirdpartyDelivery', 'alpha');
+
             if (!empty($ThirdpartyDelivery)) {
-                $this->resprints = "AND cf.rowid in (SELECT ec.element_id FROM llx_element_contact as ec INNER JOIN llx_socpeople as sp on ec.fk_socpeople = sp.rowid INNER JOIN llx_societe as s on sp.fk_soc = s.rowid WHERE ec.fk_c_type_contact = 145 and s.nom like '%".$ThirdpartyDelivery."%')";
+                $this->resprints = "AND cf.rowid in (SELECT ec.element_id 
+                FROM llx_element_contact as ec 
+                INNER JOIN " . MAIN_DB_PREFIX . "socpeople as sp on ec.fk_socpeople = sp.rowid 
+                INNER JOIN " . MAIN_DB_PREFIX . "societe as s on sp.fk_soc = s.rowid 
+                ," . MAIN_DB_PREFIX . "c_type_contact as ctc
+                WHERE ec.fk_c_type_contact = ctc.rowid and s.nom like '%".$ThirdpartyDelivery."%' 
+                AND ctc.element = 'order_supplier' AND  ctc.source = 'external' AND ctc.code = 'SHIPPING')";
             }
 
         }
@@ -100,10 +106,18 @@ class ActionsThirdpartyDelivery
     {
         global $conf, $langs;
         if ($parameters["currentcontext"] == "supplierorderlist") {
-            $ThirdpartyDelivery = GETPOST('search_ThirdpartyDelivery', 'alpha');
-            print '<td class="liste_titre right">';
-            print '<input class="flat" type="text" size="4" name="search_ThirdpartyDelivery" value="'.dol_escape_htmltag($ThirdpartyDelivery).'">';
-            print '</td>';
+            if ( empty( $parameters['arrayfields']['c_ThirdpartyDelivery']) || $parameters['arrayfields']['c_ThirdpartyDelivery']['checked']) {
+                $ThirdpartyDelivery = GETPOST('search_ThirdpartyDelivery', 'alpha');
+                $search_remove_btn = GETPOST('button_removefilter_x', 'alpha');
+                if (!empty($search_remove_btn)) {
+                    $ThirdpartyDelivery="";
+                }
+                $res = '<td class="liste_titre left">';
+                $res .= '<input class="flat" type="text" size="8" name="search_ThirdpartyDelivery" value="'.dol_escape_htmltag($ThirdpartyDelivery).'">';
+                $res .= '</td>';
+                $this->resprints = $res;
+                return 0;
+            }
         }
         return 1;
     }
@@ -112,11 +126,12 @@ class ActionsThirdpartyDelivery
         global $conf, $langs;
         $langs->load('thirdpartydelivery@thirdpartydelivery');
         if ($parameters["currentcontext"] == "supplierorderlist") {
-            $this->resprints = getTitleFieldOfList($langs->trans("ThirdpartyDelivery"), $_SERVER["PHP_SELF"], '', $parameters["param"], '', '', $parameters["sortfield"], $parameters["sortorder"], 'right ');
-            return $this;
-
+            if (empty( $parameters['arrayfields']['c_ThirdpartyDelivery']) || $parameters['arrayfields']['c_ThirdpartyDelivery']['checked']) {
+                $this->resprints = getTitleFieldOfList($langs->trans("ThirdpartyDelivery"), $_SERVER["PHP_SELF"], '', $parameters["param"], '', '', $parameters["sortfield"], $parameters["sortorder"], 'right ');
+            }
+            return 0;
         }
-        return 0;
+        return 1;
     }
     public function printFieldListValue($parameters, $object, $action)
     {
@@ -125,13 +140,16 @@ class ActionsThirdpartyDelivery
         require_once DOL_DOCUMENT_ROOT . '/societe/class/societe.class.php';
         global $conf,$db;
         if ($parameters["currentcontext"] == "supplierorderlist") {
-            $supplierorderlist =  new CommandeFournisseur($db);
-            $supplierorderlist->fetch($parameters['obj']->rowid);
-            $contact = new Contact($db);
-            $contact->fetch($supplierorderlist->getIdContact('external','SHIPPING')[0]);
-            $tier = new Societe($db);
-            $tier->fetch($contact->socid);
-            print '<td class="right">'.$tier->getNomUrl(1).'</td>';
+            if ( empty( $parameters['arrayfields']['c_ThirdpartyDelivery']) || $parameters['arrayfields']['c_ThirdpartyDelivery']['checked']) {
+                $supplierorderlist = new CommandeFournisseur($db);
+                //$parameters['totalarray']['nbfield']++;
+                $supplierorderlist->fetch($parameters['obj']->rowid);
+                $contact = new Contact($db);
+                $contact->fetch($supplierorderlist->getIdContact('external', 'SHIPPING')[0]);
+                $tier = new Societe($db);
+                $tier->fetch($contact->socid);
+                print '<td class="tdoverflowmax150">' . $tier->getNomUrl(1) . '</td>';
+            }
         }
         return 1;
     }
@@ -152,9 +170,9 @@ class ActionsThirdpartyDelivery
 		$error = 0; // Error counter
 
 		/* print_r($parameters); print_r($object); echo "action: " . $action; */
-		if (in_array($parameters['currentcontext'], array('somecontext1', 'somecontext2'))) {	    // do something only for the context 'somecontext1' or 'somecontext2'
-			// Do what you want here...
-			// You can for example call global vars like $fieldstosearchall to overwrite them, or update database depending on $action and $_POST values.
+		if (in_array($parameters['currentcontext'], array('supplierorderlist'))) {	    // do something only for the context 'somecontext1' or 'somecontext2'
+            $langs->load('thirdpartydelivery@thirdpartydelivery');
+            $parameters['arrayfields']['c_ThirdpartyDelivery'] = array(  "label" => $langs->trans("ThirdpartyDelivery"),'enabled'=>1, 'position'=>51);
 		}
 
 		if (!$error) {

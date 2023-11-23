@@ -18,9 +18,9 @@
 #
 
 # Module label 'ModuleThirdpartyDeliveryName'
-ModuleThirdpartyDeliveryName = ThirdpartyDelivery
+ModuleThirdpartyDeliveryName = Tiers livraison
 # Module description 'ModuleThirdpartyDeliveryDesc'
-ModuleThirdpartyDeliveryDesc = ThirdpartyDelivery description
+ModuleThirdpartyDeliveryDesc = Afficher le Tiers livraison dans les commandes fournisseur
 
 #
 # Admin page
