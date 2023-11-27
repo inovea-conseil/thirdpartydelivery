@@ -167,6 +167,7 @@ class ActionsThirdpartyDelivery
                 <?php
             }
         }
+        return 1;
     }
 
 	/**
