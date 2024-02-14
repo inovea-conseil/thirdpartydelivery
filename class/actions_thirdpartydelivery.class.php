@@ -443,6 +443,7 @@ class ActionsThirdpartyDelivery
 				return 0;
 			}
 		}
+		return 0;
 	}
 
 	/* Add here any other hooked methods... */
