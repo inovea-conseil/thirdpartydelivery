@@ -144,11 +144,15 @@ class ActionsThirdpartyDelivery
                 $supplierorderlist = new CommandeFournisseur($db);
                 //$parameters['totalarray']['nbfield']++;
                 $supplierorderlist->fetch($parameters['obj']->rowid);
-                $contact = new Contact($db);
-                $contact->fetch($supplierorderlist->getIdContact('external', 'SHIPPING')[0]);
-                $tier = new Societe($db);
-                $tier->fetch($contact->socid);
-                print '<td class="tdoverflowmax150">' . $tier->getNomUrl(1) . '</td>';
+                if (array_key_exists(0, $supplierorderlist->getIdContact('external', 'SHIPPING'))) {
+					$contact = new Contact($db);
+					$contact->fetch($supplierorderlist->getIdContact('external', 'SHIPPING')[0]);
+					$tier = new Societe($db);
+					$tier->fetch($contact->socid);
+					print '<td class="tdoverflowmax150">' . $tier->getNomUrl(1) . '</td>';
+                } else {
+					print '<td class="tdoverflowmax150"></td>';
+                }
             }
         }
         return 1;
