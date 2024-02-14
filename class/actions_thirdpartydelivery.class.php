@@ -72,9 +72,9 @@ class ActionsThirdpartyDelivery
 	 * @param	array			$parameters		Array of parameters
 	 * @param	CommonObject    $object         The object to process (an invoice if you are in invoice module, a propale in propale's module, etc...)
 	 * @param	string			$action      	'add', 'update', 'view'
-	 * @return	int         					<0 if KO,
-	 *                           				=0 if OK but we want to process standard actions too,
-	 *                            				>0 if OK and we want to replace standard actions.
+	 * @return	int         					if KO: <0
+	 *                           				|| if OK but we want to process standard actions too: =0
+	 *                            				|| if OK and we want to replace standard actions: >0
 	 */
 	public function getNomUrl($parameters, &$object, &$action)
 	{
@@ -181,7 +181,7 @@ class ActionsThirdpartyDelivery
 	 * @param   CommonObject    $object         The object to process (an invoice if you are in invoice module, a propale in propale's module, etc...)
 	 * @param   string          $action         Current action (if set). Generally create or edit or null
 	 * @param   HookManager     $hookmanager    Hook manager propagated to allow calling another hook
-	 * @return  int                             < 0 on error, 0 on success, 1 to replace standard code
+	 * @return  int                             on error: <0 || on success: 0 || to replace standard code: 1
 	 */
 	public function doActions($parameters, &$object, &$action, $hookmanager)
 	{
@@ -213,7 +213,7 @@ class ActionsThirdpartyDelivery
 	 * @param   CommonObject    $object         The object to process (an invoice if you are in invoice module, a propale in propale's module, etc...)
 	 * @param   string          $action         Current action (if set). Generally create or edit or null
 	 * @param   HookManager     $hookmanager    Hook manager propagated to allow calling another hook
-	 * @return  int                             < 0 on error, 0 on success, 1 to replace standard code
+	 * @return  int                             on error: <0 || on success: 0 || to replace standard code: 1
 	 */
 	public function doMassActions($parameters, &$object, &$action, $hookmanager)
 	{
@@ -246,7 +246,7 @@ class ActionsThirdpartyDelivery
 	 * @param   CommonObject    $object         The object to process (an invoice if you are in invoice module, a propale in propale's module, etc...)
 	 * @param   string          $action         Current action (if set). Generally create or edit or null
 	 * @param   HookManager     $hookmanager    Hook manager propagated to allow calling another hook
-	 * @return  int                             < 0 on error, 0 on success, 1 to replace standard code
+	 * @return  int                             on error: <0 || on success: 0 || to replace standard code: 1
 	 */
 	public function addMoreMassActions($parameters, &$object, &$action, $hookmanager)
 	{
@@ -276,9 +276,9 @@ class ActionsThirdpartyDelivery
 	 * @param	array	$parameters     Array of parameters
 	 * @param   Object	$object		   	Object output on PDF
 	 * @param   string	$action     	'add', 'update', 'view'
-	 * @return  int 		        	<0 if KO,
-	 *                          		=0 if OK but we want to process standard actions too,
-	 *  	                            >0 if OK and we want to replace standard actions.
+	 * @return  int                     if KO: <0
+	 *                                  || if OK but we want to process standard actions too: =0
+	 *                                  || if OK and we want to replace standard actions: >0
 	 */
 	public function beforePDFCreation($parameters, &$object, &$action)
 	{
@@ -303,9 +303,9 @@ class ActionsThirdpartyDelivery
 	 * @param	array	$parameters     Array of parameters
 	 * @param   Object	$pdfhandler     PDF builder handler
 	 * @param   string	$action         'add', 'update', 'view'
-	 * @return  int 		            <0 if KO,
-	 *                                  =0 if OK but we want to process standard actions too,
-	 *                                  >0 if OK and we want to replace standard actions.
+	 * @return  int                    if KO: <0
+	 *                                 || if OK but we want to process standard actions too: =0
+	 *                                 || if OK and we want to replace standard actions: >0
 	 */
 	public function afterPDFCreation($parameters, &$pdfhandler, &$action)
 	{
@@ -333,7 +333,7 @@ class ActionsThirdpartyDelivery
 	 * @param   array           $parameters     Hook metadatas (context, etc...)
 	 * @param   string          $action         Current action (if set). Generally create or edit or null
 	 * @param   HookManager     $hookmanager    Hook manager propagated to allow calling another hook
-	 * @return  int                             < 0 on error, 0 on success, 1 to replace standard code
+	 * @return  int                             on error: <0 || on success: 0 || to replace standard code: 1
 	 */
 	public function loadDataForCustomReports($parameters, &$action, $hookmanager)
 	{
@@ -373,9 +373,9 @@ class ActionsThirdpartyDelivery
 	 * @param   array           $parameters     Hook metadatas (context, etc...)
 	 * @param   string          $action         Current action (if set). Generally create or edit or null
 	 * @param   HookManager     $hookmanager    Hook manager propagated to allow calling another hook
-	 * @return  int 		      			  	<0 if KO,
-	 *                          				=0 if OK but we want to process standard actions too,
-	 *  	                            		>0 if OK and we want to replace standard actions.
+	 * @return  int                             if KO: <0
+	 *                                          || if OK but we want to process standard actions too: =0
+	 *                                          || if OK and we want to replace standard actions: >0
 	 */
 	public function restrictedArea($parameters, &$action, $hookmanager)
 	{
@@ -401,9 +401,9 @@ class ActionsThirdpartyDelivery
 	 * @param   CommonObject    $object         The object to process (an invoice if you are in invoice module, a propale in propale's module, etc...)
 	 * @param   string          $action         'add', 'update', 'view'
 	 * @param   Hookmanager     $hookmanager    hookmanager
-	 * @return  int                             <0 if KO,
-	 *                                          =0 if OK but we want to process standard actions too,
-	 *                                          >0 if OK and we want to replace standard actions.
+	 * @return  int                             if KO: <0
+	 *                                          || if OK but we want to process standard actions too: =0
+	 *                                          || if OK and we want to replace standard actions: >0
 	 */
 	public function completeTabsHead(&$parameters, &$object, &$action, $hookmanager)
 	{
