@@ -20,7 +20,7 @@
 # Module label 'ModuleThirdpartyDeliveryName'
 ModuleThirdpartyDeliveryName = Tiers livraison
 # Module description 'ModuleThirdpartyDeliveryDesc'
-ModuleThirdpartyDeliveryDesc = Afficher le Tiers livraison dans les commandes fournisseur
+ModuleThirdpartyDeliveryDesc = Affiche le tiers de livraison dans les commandes fournisseur
 
 #
 # Admin page
