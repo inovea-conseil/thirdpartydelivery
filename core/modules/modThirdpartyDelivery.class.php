@@ -2,7 +2,8 @@
 /* Copyright (C) 2004-2018  Laurent Destailleur     <eldy@users.sourceforge.net>
  * Copyright (C) 2018-2019  Nicolas ZABOURI         <info@inovea-conseil.com>
  * Copyright (C) 2019-2020  Frédéric France         <frederic.france@netlogic.fr>
- * Copyright (C) 2023 Copyright (C) 2021 Nicolas ZABOURI   <info@inovea-conseil.com>
+ * Copyright (C) 2021-2023  Nicolas ZABOURI         <info@inovea-conseil.com>
+ * Copyright (C) 2024       William Mead            <william.mead@manchenumerique.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
