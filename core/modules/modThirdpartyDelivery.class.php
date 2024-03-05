@@ -2,7 +2,8 @@
 /* Copyright (C) 2004-2018  Laurent Destailleur     <eldy@users.sourceforge.net>
  * Copyright (C) 2018-2019  Nicolas ZABOURI         <info@inovea-conseil.com>
  * Copyright (C) 2019-2020  Frédéric France         <frederic.france@netlogic.fr>
- * Copyright (C) 2023 Copyright (C) 2021 Nicolas ZABOURI   <info@inovea-conseil.com>
+ * Copyright (C) 2021-2023  Nicolas ZABOURI         <info@inovea-conseil.com>
+ * Copyright (C) 2024       William Mead            <william.mead@manchenumerique.fr>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -72,7 +73,7 @@ class modThirdpartyDelivery extends DolibarrModules
 		$this->editor_url = 'https://www.inovea-conseil.com';
 
 		// Possible values for version are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated' or a version string like 'x.y.z'
-		$this->version = '1.0.0';
+		$this->version = '1.1.0';
 		// Url to the file with your last numberversion of this module
 		//$this->url_last_version = 'http://www.example.com/versionmodule.txt';
 

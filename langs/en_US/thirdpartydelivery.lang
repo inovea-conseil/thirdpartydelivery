@@ -18,9 +18,9 @@
 #
 
 # Module label 'ModuleThirdpartyDeliveryName'
-ModuleThirdpartyDeliveryName = ThirdpartyDelivery
+ModuleThirdpartyDeliveryName = Thirdparty delivery
 # Module description 'ModuleThirdpartyDeliveryDesc'
-ModuleThirdpartyDeliveryDesc = ThirdpartyDelivery description
+ModuleThirdpartyDeliveryDesc = Show the thirdparty delivery in supplier purchase orders
 
 #
 # Admin page
@@ -51,3 +51,5 @@ MyPageName = My page name
 #
 MyWidget = My widget
 MyWidgetDescription = My widget description
+
+ThirdpartyDelivery = Thirdparty delivery
